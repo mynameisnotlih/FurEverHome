@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+<!-- Inherit shared layout structure from base.html -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Adoption Requests for Owner's Pets -->
+<!-- ----------------------------- -->
+
+<h2>Adoption Requests for Your Pets</h2>
+
+<!-- Loop through all requests made for pets owned by the current user -->
+<div class="pet-grid">
+    {% for req in requests %}
+    <div class="pet-card">
+        <div class="pet-info">
+            <!-- Pet name the request is related to -->
+            <h3>{{ req['pet_name'] }}</h3>
+
+            <!-- Name of the user who made the request -->
+            <p><strong>Requester:</strong> {{ req['username'] }}</p>
+
+            <!-- Message that was sent by the requester -->
+            <p><strong>Message:</strong> {{ req['message'] }}</p>
+
+            <!-- Current status of the request: Pending, Approved, or Deny -->
+            <p><strong>Status:</strong> {{ req['status'] }}</p>
+
+            <!-- Action buttons for the owner to manage the request -->
+            <div class="request-actions">
+                <!-- Handle button to approve or deny the request -->
+                <a href="{{ url_for('handle_request', request_id=req['id']) }}" class="edit-btn">Handle Request</a>
+
+                <!-- If approved and chat is enabled, show chat button -->
+                {% if req['status'] == 'Approved' and req['chat_enable'] %}
+                    <a href="{{ url_for('chat', request_id=req['id']) }}" class="chat-btn">Message User</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

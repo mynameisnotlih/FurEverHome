@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+<!-- Inherits layout from base.html -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Chat Interface for Pet Adoption -->
+<!-- ----------------------------- -->
+
+    <h2 class="chat-title">Chat about "{{ pet_name }}"</h2>
+    <!-- Displays the chat title including the pet's name -->
+
+    <div class="chat-container">
+        <!-- Wrapper for the entire chat interface -->
+
+        <div id="chat-box" class="chat-box">
+            <!-- Scrollable container for displaying chat messages -->
+
+            {% for msg in messages %}
+            <!-- Loop through each chat message from the backend -->
+
+                <div class="chat-message {% if msg.sender == session.username %}user{% else %}owner{% endif %}">
+                    <!-- Style the message depending on sender (user or owner) -->
+
+                    <strong class="chat-sender {% if msg.sender == session.username %}user-name{% else %}owner-name{% endif %}">
+                        {{ msg.sender }}
+                    </strong><br>
+                    <!-- Sender name styled in red (user) or green (owner) -->
+
+                    <span class="chat-timestamp">{{ msg.timestamp }}</span><br>
+                    <!-- Timestamp shown under sender name -->
+
+                    <div class="chat-bubble">{{ msg.message }}</div>
+                    <!-- The actual message content shown inside a bubble box -->
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <!-- ----------------------------- -->
+        <!-- Message Submission Form -->
+        <!-- ----------------------------- -->
+        <form method="post" action="{{ url_for('chat', request_id=request_id) }}">
+            <!-- Submits new message to the /chat/<request_id> route -->
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <!-- CSRF protection hidden field -->
+
+            <textarea name="message" class="chat-textarea" rows="3" placeholder="Enter your message here..." required></textarea>
+            <!-- Text box for typing a message -->
+
+            <button type="submit">Send</button>
+            <!-- Button to send message -->
+        </form>
+    </div>
+{% endblock %}

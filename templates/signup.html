@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+<!-- Use base layout to include shared header/footer/navigation -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- User Sign-Up Form -->
+<!-- ----------------------------- -->
+
+<h2>Sign Up</h2>
+
+<!-- Form to collect user registration data -->
+<!-- method="post" to securely send data to the server -->
+<form method="post" action="{{ url_for('signup') }}">
+
+    <!-- CSRF protection token -->
+    <!-- Helps prevent Cross-Site Request Forgery by verifying the form was submitted from the same origin -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <!-- Username field -->
+    <p>
+        <label for="username">Username:</label><br>
+        <input type="text" name="username" id="username" required>
+    </p>
+
+    <!-- Email field -->
+    <p>
+        <label for="email">Email:</label><br>
+        <input type="email" name="email" id="email" required>
+    </p>
+
+    <!-- Password field -->
+    <p>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password" id="password" required>
+    </p>
+
+    <!-- Confirm Password field (client-side check for typo) -->
+    <p>
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="password" name="confirm_password" id="confirm_password" required>
+    </p>
+
+    <!-- Full name of the user -->
+    <p>
+        <label for="full_name">Full Name:</label><br>
+        <input type="text" name="full_name" id="full_name" required>
+    </p>
+
+    <!-- Submit button to create the account -->
+    <button type="submit">Create Account</button>
+</form>
+
+{% endblock %}

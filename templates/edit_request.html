@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+<!-- Inherits layout and structure from base.html -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Edit Adoption Request Page -->
+<!-- ----------------------------- -->
+
+    <h2>Edit Adoption Request for "{{ req.pet_name }}"</h2>
+    <!-- Dynamic heading showing which pet this request is about -->
+
+    <form method="post">
+        <!-- Form submits to the same page using POST -->
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <!-- CSRF protection token to secure form submission -->
+
+        <!-- ----------------------------- -->
+        <!-- Message Field -->
+        <!-- ----------------------------- -->
+        <p>
+            <label for="message">Message:</label><br>
+            <textarea name="message" id="message" rows="4" required>{{ req.message }}</textarea>
+            <!-- Pre-filled with the original message; required for submission -->
+        </p>
+
+        <!-- ----------------------------- -->
+        <!-- Current Status (Read-Only) -->
+        <!-- ----------------------------- -->
+        <p><strong>Current Status:</strong> {{ req.status }}</p>
+        <!-- Displays the current status but does not allow edits -->
+
+        <input type="hidden" name="status" value="{{ req.status }}">
+        <!-- Keeps the current status value when submitting, hidden to user -->
+
+        <!-- ----------------------------- -->
+        <!-- Submit Button -->
+        <!-- ----------------------------- -->
+        <button type="submit">Update Request</button>
+        <!-- Submits the edited message back to the server -->
+    </form>
+
+{% endblock %}

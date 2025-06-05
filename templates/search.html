@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+<!-- Inherits base layout with shared header, footer, etc. -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Pet Search Page -->
+<!-- ----------------------------- -->
+
+<h2>Search pets</h2>
+
+<!-- Search Form: allows user to search pets by name, species, or breed -->
+<form method="get">
+    <label for="q"><strong>Search by name, species or breed:</strong></label><br>
+    <!-- Input field retains the last search query using `value="{{ query }}"` -->
+    <input type="text" name="q" id="q" value="{{ query }}">
+    <button type="submit" class="btn adopt-btn">Search</button>
+</form>
+
+<!-- Display results only if a query was submitted -->
+{% if query %}
+    <!-- Show what the user searched for -->
+    <p>Showing results for "<strong>{{ query }}</strong>":</p>
+
+    {% if results %}
+        <!-- If matches were found, list them -->
+        <ul>
+            {% for pet in results %}
+                <li><strong>{{ pet.name }}</strong> ({{ pet.species }}) - {{ pet.breed }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Link to full pet listings (filtered by search) -->
+        <a href="{{ url_for('list_pets') }}" class="btn adopt-btn search-results-button">See These Pets</a>
+    {% else %}
+        <!-- If no matches, show message -->
+        <p>No pets found matching your search.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

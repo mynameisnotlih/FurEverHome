@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+<!-- Inherits layout from the base.html file (includes header, nav, footer, styles) -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Login Page -->
+<!-- ----------------------------- -->
+
+<h2>Login</h2>
+
+<!-- Login Form -->
+<form method="post" action="{{ url_for('login') }}">
+    <!-- CSRF token for form protection -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <!-- Username input field -->
+    <p>
+        <label for="username">Username:</label><br>
+        <input type="text" name="username" id="username" required>
+    </p>
+
+    <!-- Password input field -->
+    <p>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password" id="password" required>
+    </p>
+
+    <!-- Submit button to log in -->
+    <button type="submit">Login</button>
+</form>
+
+<!-- Navigation link to Sign Up -->
+<p class="signup-link">
+    Don't have an account yet?
+    <a href="{{ url_for('signup') }}">Create one here</a>
+</p>
+
+<!-- Forgot Password link -->
+<p>
+    <a href="{{ url_for('forgot_password') }}">Forgot your password?</a>
+</p>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+<!-- Inherit the shared layout from base.html -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Password Reset Link Page -->
+<!-- ----------------------------- -->
+
+  <!-- Page heading -->
+  <h2>Password Reset Link</h2>
+
+  <!-- Inform the user that the reset link is only valid for 30 minutes -->
+  <p>This link is valid for 30 minutes. Copy and paste it into your browser if it doesn't open automatically:</p>
+
+  <!-- Display the generated password reset URL in a styled container -->
+  <div style="margin-top: 1rem; word-wrap: break-word;">
+    <a href="{{ reset_url }}">{{ reset_url }}</a>
+  </div>
+
+  <!-- Navigation option to return to the login page -->
+  <p style="margin-top: 2rem;">
+    <a href="{{ url_for('login') }}">Back to Login</a>
+  </p>
+
+{% endblock %}

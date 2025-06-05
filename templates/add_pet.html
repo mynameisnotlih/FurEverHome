@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+<!-- This template extends from base.html -->
+
+{% block content %}
+<!-- All the HTML here will be injected into the "content" block defined in base.html -->
+
+    <h2>Add a New Pet</h2>
+
+    <!-- Form to add a new pet -->
+    <form method="post" action="{{ url_for('add_pet') }}" enctype="multipart/form-data">
+        {# The form sends a POST request to the /add_pet route and supports file upload using multipart encoding #}
+
+        <!-- CSRF protection token -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {# This protects against Cross-Site Request Forgery attacks, required for secure form submissions #}
+
+        <!-- Pet photo upload -->
+        <div class="form-group">
+            <label for="photo">Pet Photo (required):</label>
+            <input type="file" name="photo" id="photo" accept="image/*" required onchange="previewPhoto(event)">
+            {# Accepts only image files; the previewPhoto() function is triggered when a file is selected #}
+
+            <img id="photoPreview" src="#" alt="Photo Preview" style="display:none; max-width: 200px; margin-top: 10px;"/>
+            {# Hidden image element that will show a preview of the selected file #}
+        </div>
+
+        <!-- Preview image script -->
+        <script>
+            function previewPhoto(event) {
+                const preview = document.getElementById('photoPreview');
+                const file = event.target.files[0];
+
+                if (file) {
+                    preview.src = URL.createObjectURL(file); // Creates a temporary URL to show the selected image
+                    preview.style.display = 'block'; // Shows the image preview
+                } else {
+                    preview.style.display = 'none'; // Hides the preview if no file is selected
+                }
+            }
+        </script>
+
+        <!-- Pet name input -->
+        <div class="form-group">
+            <label for="name">Pet Name:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+
+        <!-- Species input (e.g., Dog or Cat) -->
+        <div class="form-group">
+            <label for="species">Species (e.g., Dog/Cat):</label>
+            <input type="text" name="species" id="species" required>
+        </div>
+
+        <!-- Breed input -->
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" name="breed" id="breed" placeholder="e.g., 'Labrador' or 'Unknown'">
+        </div>
+
+        <!-- Pet age in years -->
+        <div class="form-group">
+            <label for="age_years">Pet Age (years):</label>
+            <input type="number" name="age_years" id="age_years" min="0" step="1" required>
+        </div>
+
+        <!-- Pet age in months -->
+        <div class="form-group">
+            <label for="age_months">Pet Age (months):</label>
+            <input type="number" name="age_months" id="age_months" min="0" max="11" step="1" required>
+        </div>
+
+        <!-- Optional description about the pet -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="3"></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit">Add Pet</button>
+    </form>
+
+{% endblock %}

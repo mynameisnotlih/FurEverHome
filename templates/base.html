@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Base HTML structure for the entire app layout -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>FurEver Home Pet Adoption</title>
+    <!-- Sets the browser title/tab name -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Links the external CSS stylesheet using Flask's url_for helper to locate it in the static folder -->
+</head>
+
+<body>
+    <!-- ----------------------------- -->
+    <!-- Header Section -->
+    <!-- ----------------------------- -->
+    <header>
+        <!-- Logo image from static folder -->
+        <img src="{{ url_for('static', filename='fureverhome_resized.png') }}" alt="FurEver Home Logo">
+
+        <!-- Main title -->
+        <h1>Fur-Ever Home—Adopt With Care!</h1>
+
+        {% if session.get('user_id') %}
+        <!-- Show navigation if user is logged in -->
+
+            <nav>
+                {% if session.get('user_id') and request.endpoint != 'login' %}
+                    <!-- Navigation links for logged-in users -->
+                    <a href="{{ url_for('list_pets') }}">All Pets</a> |
+                    <a href="{{ url_for('add_pet') }}">Add Pet</a> |
+                    <a href="{{ url_for('my_requests') }}">My Requests</a> |
+                    <a href="{{ url_for('search') }}">Search</a> |
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <!-- If not logged in, show login/signup unless on logout route -->
+                    {% if request.endpoint != 'logout' %}
+                        <a href="{{ url_for('signup') }}">Sign Up</a> |
+                        <a href="{{ url_for('login') }}">Login</a>
+                    {% endif %}
+                {% endif %}
+            </nav>
+
+            <hr> <!-- Visual separator below navigation -->
+        {% endif %}
+    </header>
+
+    <!-- ----------------------------- -->
+    <!-- Main Content Section -->
+    <!-- ----------------------------- -->
+    <main>
+        <!-- Flash messages block: shows success, warning, error alerts -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, msg in messages %}
+                        <li class="{{ category }}">{{ msg }}</li>
+                        <!-- Each message gets its own class (e.g., success, error) for styling -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+        <!-- Content from child templates will be injected here -->
+    </main>
+
+    <!-- ----------------------------- -->
+    <!-- Footer Section -->
+    <!-- ----------------------------- -->
+    <footer class="site-footer">
+        <p>Fur-Ever Home. All Rights Reserved. Adopt with care.</p>
+    </footer>
+</body>
+</html>

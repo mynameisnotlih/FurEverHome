@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+<!-- Inherits layout from base.html for consistent styling -->
+
+{% block content %}
+<!-- ----------------------------- -->
+<!-- Edit Pet Page -->
+<!-- ----------------------------- -->
+
+    <h2>Edit Pet</h2>
+    <!-- Page heading -->
+
+    <form method="post" action="{{ url_for('edit_pet', pet_id=pet['id']) }}" enctype="multipart/form-data">
+        <!-- Submits form data to the /edit_pet/<pet_id> route with file upload enabled -->
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <!-- CSRF protection token -->
+
+        <!-- ----------------------------- -->
+        <!-- Current and New Photo Upload -->
+        <!-- ----------------------------- -->
+        <div class="form-group">
+            <label for="photo">Current Photo:</label><br>
+
+            <!-- Single photo preview with conditional image source -->
+            <img id="photoPreview"
+                src="{{ url_for('static', filename=pet['photo'] if pet['photo'] else 'default.jpg') }}"
+                alt="Current Photo"
+                style="max-width: 200px; margin-bottom: 10px;">
+
+            <br>
+            <label for="photo">Change Photo:</label>
+            <input type="file" name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)">
+        </div>
+
+        <script>
+            // Live preview of the uploaded image
+            function previewPhoto(event) {
+                const preview = document.getElementById('photoPreview');
+                const file = event.target.files[0];
+
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = 'block';
+                }
+            }
+        </script>
+
+        <!-- ----------------------------- -->
+        <!-- Pet Details Form Fields -->
+        <!-- ----------------------------- -->
+
+        <div class="form-group">
+            <label for="name">Pet Name:</label>
+            <input type="text" name="name" id="name" value="{{ pet['name'] }}" required>
+            <!-- Pre-fills the name input with the current pet's name -->
+        </div>
+
+        <div class="form-group">
+            <label for="species">Species:</label>
+            <input type="text" name="species" id="species" value="{{ pet['species'] }}" required>
+            <!-- Pre-fills the species field -->
+        </div>
+
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" name="breed" id="breed" value="{{ pet['breed'] }}">
+            <!-- Optional field for pet breed -->
+        </div>
+
+        <div class="form-group">
+            <label for="age_years">Age (years):</label>
+            <input type="number" name="age_years" id="age_years" value="{{ pet['age_years'] }}" min="0" step="1">
+            <!-- Numeric input for age in years -->
+        </div>
+
+        <div class="form-group">
+            <label for="age_months">Age (months):</label>
+            <input type="number" name="age_months" id="age_months" value="{{ pet['age_months'] }}" min="0" max="11" step="1">
+            <!-- Numeric input for age in months, capped at 11 -->
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="3">{{ pet['description'] }}</textarea>
+            <!-- Text area pre-filled with the pet's current description -->
+        </div>
+
+        <!-- ----------------------------- -->
+        <!-- 💾 Submit Button -->
+        <!-- ----------------------------- -->
+        <button type="submit">Update Pet</button>
+        <!-- Submits the form to update pet details -->
+    </form>
+{% endblock %}

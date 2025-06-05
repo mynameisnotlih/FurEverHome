@@ -1,0 +1,462 @@
+/* -----------------------------
+    Global Reset & Base Styles
+----------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding and border are included in total width/height */
+}
+
+/* -----------------------------
+        Body & Typography
+----------------------------- */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+    color: #333;
+    line-height: 1.6;
+    padding: 1rem;
+}
+
+/* -----------------------------
+        Header & Navigation
+----------------------------- */
+header {
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 1.5rem 1rem;
+    border-bottom: 4px solid #d00;
+}
+
+header img {
+    max-width: 100%;
+    height: auto;
+}
+
+nav {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #006400;
+    font-weight: bold;
+}
+
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #006400;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #d00;
+}
+
+/* -----------------------------
+        Flash Messages
+----------------------------- */
+.flashes {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: #ffe6e6;
+    color: #900;
+    font-weight: bold;
+}
+
+.flashes li {
+    margin-bottom: 0.5rem;
+}
+
+/* -----------------------------
+            Form Styling
+----------------------------- */
+form {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form p {
+    margin-bottom: 0.5rem;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #006400;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #d00;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.signup-link a {
+    color: #006400;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    color: #d00;
+    text-decoration: underline;
+}
+
+/* -----------------------------
+    Table - Adoption Requests
+----------------------------- */
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.request-table th,
+.request-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.request-table th {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* -----------------------------
+        Buttons & Actions
+----------------------------- */
+.actions button {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: white;
+    text-decoration: none;
+    margin-top: 0.75rem;
+}
+
+.edit-btn {
+    background-color: #007bff;
+}
+.edit-btn:hover {
+    background-color: #0069d9;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.chat-btn,
+.chat-button {
+    background-color: #28a745;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    text-decoration: none;
+    margin-top: 0.3rem;
+}
+.chat-btn:hover,
+.chat-button:hover {
+    background-color: #218838;
+}
+
+/* -----------------------------
+            Chat Styles
+----------------------------- */
+.chat-title {
+    color: #006400;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.chat-container {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1.5rem;
+    background: #ffffff;
+    max-width: 700px;
+    margin: auto;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    border: 1px solid #eee;
+    padding: 0.5rem;
+    background: #f9f9f9;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    margin-bottom: 0.8rem;
+}
+
+.owner {
+    align-self: flex-start;
+}
+
+.user {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.owner-name {
+    color: #2e7d32;
+    text-align: left;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.user-name {
+    color: #b71c1c;
+    text-align: right;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.chat-timestamp {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: -1rem;
+    margin-bottom: 0.3rem;
+}
+
+.owner .chat-bubble {
+    background-color: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    padding: 0.6rem;
+    border-radius: 4px;
+    margin: 0;
+    text-align: left;
+}
+
+.user .chat-bubble {
+    background-color: #fdecea;
+    border-right: 4px solid #b71c1c;
+    padding: 0.6rem;
+    border-radius: 4px;
+    margin: 0;
+    text-align: right;
+}
+
+.chat-textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* -----------------------------
+        Pet Cards Grid
+----------------------------- */
+.pet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.pet-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    min-height: 500px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.pet-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 300px;
+    background-color: #f0f0f0;
+}
+
+.pet-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.pet-info h3 {
+    margin-top: 0;
+    color: #006400;
+}
+
+.pet-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pet-actions a,
+.pet-actions button {
+    text-align: center;
+    padding: 0.4rem 0.8rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.adopt-btn {
+    background-color: #006400;
+    color: #fff;
+}
+
+.edit-btn {
+    background-color: #007BFF;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.manage-btn {
+    background-color: #444;
+    color: white;
+}
+
+/* -----------------------------
+       Search Result Button
+----------------------------- */
+a.btn.search-results-button {
+    margin-top: 2rem !important;
+    display: inline-block;
+}
+
+/* -----------------------------
+            Form Groups
+----------------------------- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* -----------------------------
+            Footer
+----------------------------- */
+.site-footer {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+}
+
+.site-footer p {
+    margin: 0;
+    color: #006400;
+}
+
+/* -----------------------------
+        Responsive Design
+----------------------------- */
+@media (max-width: 768px) {
+    nav a {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    form {
+        padding: 1rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
